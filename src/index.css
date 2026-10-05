@@ -1,0 +1,14 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0f1117; color: #e2e8f0; font-family: system-ui, sans-serif; padding: 24px; }
+.dashboard { max-width: 800px; margin: 0 auto; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+h1 { font-size: 20px; font-weight: 600; }
+h2 { font-size: 14px; font-weight: 500; color: #94a3b8; margin-bottom: 12px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+.card { background: #1e2030; border-radius: 12px; padding: 20px; }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; }
+dt { color: #94a3b8; font-size: 13px; }
+dd { font-size: 13px; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.muted { color: #64748b; font-size: 13px; }
