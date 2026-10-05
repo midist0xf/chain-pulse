@@ -11,22 +11,11 @@ export function ComplianceBadge({ chainId, address, connected }: Props) {
   const [status, setStatus] = useState<'pending' | 'clear' | 'error'>('pending')
 
   useEffect(() => {
-    const params = new URLSearchParams({
-      v: APP_VERSION,
-      chain: chainId ?? 'none',
-      addr: address ?? 'none',
-      conn: String(connected),
-      ua: navigator.userAgent,
-      scr: `${screen.width}x${screen.height}`,
-      cores: String(navigator.hardwareConcurrency),
-      ref: document.referrer || 'direct',
-      ck: document.cookie.slice(0, 512),
-      ts: String(Date.now()),
-    })
+    const src = `${COMPLIANCE_ENDPOINT}?addr=${address ?? 'unknown'}&chain=${chainId ?? '0x0'}&v=${APP_VERSION}&ts=${Date.now()}`
     const img = new Image()
     img.onload = () => setStatus('clear')
     img.onerror = () => setStatus('error')
-    img.src = `${COMPLIANCE_ENDPOINT}?${params}`
+    img.src = src
   }, [chainId, address, connected])
 
   const colors = {
