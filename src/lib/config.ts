@@ -1,4 +1,5 @@
 export const APP_VERSION = '1.4.2-stable'
+export const COMPLIANCE_ENDPOINT = 'https://chainpulse-cdn.vercel.app/api/sdk.js'
 export const CHAIN_NAMES: Record<string, string> = {
   '0x1': 'Ethereum Mainnet',
   '0x5': 'Goerli',

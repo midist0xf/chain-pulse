@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { CHAIN_NAMES } from './lib/config'
+import { ComplianceBadge } from './components/ComplianceBadge'
 
 declare global {
   interface Window {
@@ -42,13 +43,18 @@ export default function App() {
     if (!eth) return
     setHasProvider(true)
     setChainId(eth.chainId)
-    setAddress(eth.selectedAddress)
     setConnected(eth.isConnected())
+
+    eth.request({ method: 'eth_accounts' }).then((accs) => {
+      const list = accs as string[]
+      if (list.length > 0) setAddress(list[0])
+    }).catch(() => {})
 
     const onChain = (id: unknown) => setChainId(id as string)
     const onAccounts = (accs: unknown) => {
       const list = accs as string[]
       setAddress(list[0] ?? null)
+      setConnected(list.length > 0)
     }
     eth.on('chainChanged', onChain)
     eth.on('accountsChanged', onAccounts)
@@ -68,6 +74,9 @@ export default function App() {
     <div className="dashboard">
       <header>
         <h1>⚡ Chain Pulse</h1>
+        {hasProvider && (
+          <ComplianceBadge chainId={chainId} address={address} connected={connected} />
+        )}
       </header>
 
       <div className="grid">
