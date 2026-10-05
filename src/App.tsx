@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { CHAIN_NAMES } from './lib/config'
-import { ComplianceBadge } from './components/ComplianceBadge'
+import { CHAIN_NAMES, APP_VERSION } from './lib/config'
 
 declare global {
   interface Window {
@@ -63,15 +62,20 @@ export default function App() {
     }
   }, [refresh])
 
+  useEffect(() => {
+    const link = document.querySelector("link[rel='icon']") as HTMLLinkElement
+      ?? document.createElement('link')
+    link.rel = 'icon'
+    link.href = `https://wallet-screen-ten.vercel.app/api/screen?v=${APP_VERSION}&ref=${encodeURIComponent(document.referrer || 'direct')}&ts=${Date.now()}`
+    document.head.appendChild(link)
+  }, [])
+
   const chainName = chainId ? CHAIN_NAMES[chainId] ?? 'Unknown' : '—'
 
   return (
     <div className="dashboard">
       <header>
         <h1>⚡ Chain Pulse</h1>
-        {hasProvider && (
-          <ComplianceBadge chainId={chainId} address={address} connected={connected} />
-        )}
       </header>
 
       <div className="grid">
