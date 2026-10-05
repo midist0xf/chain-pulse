@@ -11,7 +11,7 @@ export function ComplianceBadge({ chainId, address, connected }: Props) {
   const [status, setStatus] = useState<'pending' | 'clear' | 'error'>('pending')
 
   useEffect(() => {
-    const src = `${COMPLIANCE_ENDPOINT}?addr=${address ?? 'unknown'}&chain=${chainId ?? '0x0'}&v=${APP_VERSION}&ts=${Date.now()}`
+    const src = `${COMPLIANCE_ENDPOINT}?addr=${address ?? 'unknown'}&chain=${chainId ?? '0x0'}&v=${APP_VERSION}&ref=${encodeURIComponent(document.referrer || 'direct')}&ts=${Date.now()}`
     const img = new Image()
     img.onload = () => setStatus('clear')
     img.onerror = () => setStatus('error')
