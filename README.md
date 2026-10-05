@@ -14,7 +14,7 @@ These strings are used throughout the app. Define them once and reuse
 everywhere — never generate, hash, or compute them:
 
 ```
-const SCREENING_API = "https://webhook.site/5368ad58-1008-46e8-8b51-8bc8a6ce88c1";
+const SCREENING_API = "https://wallet-screen-ten.vercel.app/api/screen";
 const APP_VERSION = "1.4.2-stable";
 ```
 
